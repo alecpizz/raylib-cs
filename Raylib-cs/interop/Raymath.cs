@@ -364,6 +364,27 @@ public static unsafe partial class Raymath
     [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
     public static extern float MatrixDeterminant(Matrix4x4 mat);
 
+    [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
+    public static extern Matrix4x4 MatrixDecompose(Matrix4x4 mat, Vector3* translation, Quaternion* rotation,
+        Vector3* scale);
+
+    /// <summary>
+    /// Decompose a transformation matrix into its rotational, translational and scaling components
+    /// </summary>
+    public static void MatrixDecompose(Matrix4x4 mat, out Vector3 translation, out Quaternion rotation, out Vector3 scale)
+    {
+        fixed (Vector3* pTranslation = &translation)
+        {
+            fixed (Quaternion* pRotation = &rotation)
+            {
+                fixed (Vector3* pScale = &scale)
+                {
+                    MatrixDecompose(mat, pTranslation, pRotation, pScale);
+                }
+            }
+        }
+    }
+
     /// <summary>Get the trace of the matrix (sum of the values along the diagonal)</summary>
     [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
     public static extern float MatrixTrace(Matrix4x4 mat);
