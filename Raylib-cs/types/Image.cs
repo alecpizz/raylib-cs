@@ -58,6 +58,12 @@ public enum PixelFormat
     /// </summary>
     UncompressedR32G32B32A32,
 
+    UncompressedR16,
+
+    UncompressedR16G16B16,
+
+    UncompressedR16G16B16A16,
+
     /// <summary>
     /// 4 bpp (no alpha)
     /// </summary>
